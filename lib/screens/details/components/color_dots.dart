@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/rounded_icon_btn.dart';
 import 'package:shop_app/models/Product.dart';
+import 'package:woocommerce/models/products.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -11,7 +12,7 @@ class ColorDots extends StatelessWidget {
     @required this.product,
   }) : super(key: key);
 
-  final Product product;
+  final WooProduct product;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +24,9 @@ class ColorDots extends StatelessWidget {
       child: Row(
         children: [
           ...List.generate(
-            product.colors.length,
+            2,
             (index) => ColorDot(
-              color: product.colors[index],
+              color: Colors.white,
               isSelected: index == selectedColor,
             ),
           ),

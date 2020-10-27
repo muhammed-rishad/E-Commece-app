@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/models/Product.dart';
 import 'package:woocommerce/models/products.dart';
+import 'package:shop_app/size_config.dart';
+import 'package:shop_app/constants.dart';
 
-import '../../../constants.dart';
-import '../../../size_config.dart';
+// import '../../../constants.dart';
+// import '../../../size_config.dart';
 
 class ProductDescription extends StatelessWidget {
   const ProductDescription({
@@ -23,7 +25,7 @@ class ProductDescription extends StatelessWidget {
       children: [
         Padding(
           padding:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: Text(
             product.name,
             style: Theme.of(context).textTheme.headline6,

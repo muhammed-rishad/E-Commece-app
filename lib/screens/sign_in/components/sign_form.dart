@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/form_error.dart';
+import 'package:shop_app/config.dart';
 import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:shop_app/screens/login_success/login_success_screen.dart';
+import 'package:woocommerce/woocommerce.dart';
 
 import '../../../components/default_button.dart';
 import '../../../constants.dart';
@@ -32,6 +36,26 @@ class _SignFormState extends State<SignForm> {
       setState(() {
         errors.remove(error);
       });
+  }
+
+  final config = woocommerce();
+  // var uname = 'rishadckpd@gmail.com';
+  // var pw = 'rishad1997';
+  login() async {
+    debugPrint("login function called" + email);
+    debugPrint("mail" + email);
+    debugPrint("pwd" + password);
+    await config.wooCommerce
+        .authenticateViaJWT(username: email, password: password)
+        .then((value) {
+      debugPrint('LoggedIn suceesfully');
+      Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+    }).catchError((e) {
+      return Error();
+    });
+    // token.catchError((e) {
+    //   return Error();
+    // });
   }
 
   @override
@@ -74,8 +98,10 @@ class _SignFormState extends State<SignForm> {
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
+                debugPrint('COntinue CLikced');
+                login();
                 // if all are valid then go to success screen
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
               }
             },
           ),
@@ -148,5 +174,25 @@ class _SignFormState extends State<SignForm> {
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );
+  }
+
+  Error() {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content:
+                Text('Incorrect email address or password.Please try again '),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shop_app/models/Cart.dart';
+// import 'package:shop_app/models/Cart.dart';
+// import 'package:woocommerce/models/cart.dart';
+import 'package:woocommerce/models/cart_item.dart';
 
 import '../../../size_config.dart';
 import 'cart_card.dart';
@@ -11,21 +13,22 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  List<WooCartItem> woocartitems;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding:
           EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
       child: ListView.builder(
-        itemCount: demoCarts.length,
+        itemCount: woocartitems.length,
         itemBuilder: (context, index) => Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
           child: Dismissible(
-            key: Key(demoCarts[index].product.id.toString()),
+            key: Key(woocartitems[index].id.toString()),
             direction: DismissDirection.endToStart,
             onDismissed: (direction) {
               setState(() {
-                demoCarts.removeAt(index);
+                woocartitems.removeAt(index);
               });
             },
             background: Container(
@@ -41,7 +44,7 @@ class _BodyState extends State<Body> {
                 ],
               ),
             ),
-            child: CartCard(cart: demoCarts[index]),
+            child: CartCard(wooCartItem: woocartitems[index]),
           ),
         ),
       ),

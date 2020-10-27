@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/Product.dart';
 import 'package:woocommerce/models/products.dart';
-
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import 'package:shop_app/constants.dart';
+import 'package:shop_app/size_config.dart';
+//import '../../../constants.dart';
+//import '../../../size_config.dart';
 
 class ProductImages extends StatefulWidget {
   const ProductImages({
@@ -38,7 +39,7 @@ class _ProductImagesState extends State<ProductImages> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ...List.generate(widget.product.images.length,
-                (index) => buildSmallProductPreview(index)),
+                    (index) => buildSmallProductPreview(index)),
           ],
         )
       ],

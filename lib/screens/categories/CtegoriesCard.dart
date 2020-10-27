@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/models/Product.dart';
+import 'package:shop_app/screens/categories/cat_pro_detail_screen.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
 import 'package:woocommerce/woocommerce.dart';
+import 'package:shop_app/constants.dart';
+import 'package:shop_app/size_config.dart';
 
-import '../constants.dart';
-import '../size_config.dart';
+// import '../constants.dart';
+// import '../size_config.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({
+class CategoriesCard extends StatelessWidget {
+  const CategoriesCard({
     Key key,
     this.width = 140,
     this.aspectRetio = 1.02,
@@ -27,11 +30,11 @@ class ProductCard extends StatelessWidget {
         child: GestureDetector(
           onTap: () => Navigator.pushNamed(
             context,
-            DetailsScreen.routeName,
-            arguments: ProductDetailsArguments(product: product),
+            CatProDetailsScreen.routeName,
+            arguments: CatProductDetailsArguments(product: product),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AspectRatio(
                 aspectRatio: 1.38,
@@ -61,7 +64,7 @@ class ProductCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: getProportionateScreenWidth(18),
                       fontWeight: FontWeight.w600,
-                      color: kPrimaryColor,
+                      // color: kPrimaryColor,
                     ),
                   ),
                   // InkWell(
